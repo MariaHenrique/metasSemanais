@@ -1,0 +1,382 @@
+@(semanas: List[Semana])(content: Html)
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		 <title>Metas Semanais</title>
+		 <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/styles.css")">
+	
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/task.png")">
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<script src="@routes.Assets.at("javascripts/scripts.js")" type="text/javascript"></script>
+		
+    </head>
+    <body>
+		<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+		 <div class="container-fluid">
+		  <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">METAS SEMANAIS</a>
+		  </div>
+         <div class="navbar-collapse collapse">
+        
+    </div>
+  </div><!-- /container -->
+</div>
+<!-- /Header -->
+
+<!-- Main -->
+<div class="container-fluid">
+<div class="row">
+	<div class="col-sm-2">
+      <!-- Left column -->
+       
+      
+      <hr>
+      
+      <ul class="list-unstyled">
+		<li class="nav-header"> <a href="#addNovaMeta" data-toggle="collapse" data-target="#menu1">
+          <h5> <i class="glyphicon glyphicon-plus-sign"></i> Adicionar nova meta</h5>
+		</li>
+		<li><a href="#semana1"><i class="glyphicon glyphicon-flag"></i> Metas da Semana 1</a></li>
+        <li><a href="#semana2"><i class="glyphicon glyphicon-flag"></i> Metas da Semana 2 </a></li>
+        <li><a href="#semana3"><i class="glyphicon glyphicon-flag"></i> Metas da Semana 3</a></li>
+        <li><a href="#semana4"><i class="glyphicon glyphicon-flag"></i> Metas da Semana 4</a></li>
+        <li><a href="#semana5"><i class="glyphicon glyphicon-flag"></i> Metas da Semana 5</a></li>
+        <li><a href="#semana6"><i class="glyphicon glyphicon-flag"></i> Metas da Semana 6</a></li>
+         
+        <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#menu2">
+          <h5>Metas alcancadas <i class="glyphicon glyphicon-chevron-right"></i></h5>
+          </a>
+        
+            <ul class="list-unstyled collapse" id="menu2">
+                <li><a href="#">Information &amp; Stats</a>
+                </li>
+                <li><a href="#">Views</a>
+                </li>
+                <li><a href="#">Requests</a>
+                </li>
+                <li><a href="#">Timetable</a>
+                </li>
+                <li><a href="#">Alerts</a>
+                </li>
+            </ul>
+        </li>
+           
+    
+           
+      
+  	</div><!-- /col-3 -->
+    <div class="col-sm-9">
+      	
+   
+      <a href="#"><strong>Registro de metas semanais</strong></a>  
+      
+    
+		 <hr>
+          <div class="row">    
+		   <div class="row">                              
+	         <div class="col-md-8">
+
+			<div class="panel panel-default">
+                <div class="panel-heading"><h4><strong><i class="glyphicon glyphicon-dashboard"></i> Minhas metas</strong> </h4></div>
+				<div class="panel-body">
+                    <div class="list-group">
+          
+			
+			<div class="panel panel-default">
+                <a href="#" class="list-group-item" id="semana1"><strong>Semana 1</strong></a>
+				<div class="panel-body">
+                 <div class="list-group">
+			
+				   @if(!semanas.isEmpty() && semanas.get(0).isEmpty()){
+				        <p>Não existe nenhuma meta cadastrada para esta semana.</p>
+				    }else{
+						
+							
+					    @if(!semanas.isEmpty() && !semanas.get(0).isEmpty()){
+							
+					          @for(meta <- semanas.get(0).getMetas()){
+								<hr>
+								<table>
+								  <tr class="@meta.ehMetaAlcancada()">
+										<td>Meta: @meta.getNome() <br>
+										   Descrição: @meta.getDescricao() <br>
+										   Prioridade: @meta.getPrioridade()
+										</td></tr>
+										<tr><td>Marcar meta: </td> <td class="tdCheck" ><input class="check" type="checkbox" value="@meta.getNome()" name="marcaMetaAlcancada"  style="width: 27px; height: 25px"/></td><br></tr>
+										<tr><td>Deletar meta:</td><td><button class="btn-default deletar" id=@meta.getNome() ><img src="@routes.Assets.at("images/delete.png")"/></button></td></tr>
+								 </tr>									
+										
+								</table> 
+								<hr>
+					
+					            }
+							<p><strong> Quantidade de metas <i>alcançadas</i> nesta semana: @semanas.get(0).quantMetasAlcancadas()</strong> </p>
+							<p><strong> Quantidade de metas <i>não alcançadas</i> nesta semana: @semanas.get(0).quantMetasDesejadas()</strong> </p>							
+						}
+				    } 
+					<p><strong> Quantidade de metas nessa semana: @semanas.get(0).quantMetas()</strong> </p>
+				
+				  </div>
+				 </div>
+			</div>
+					
+					
+                 <div class="panel panel-default">
+                <a href="#" class="list-group-item" id="semana2"><strong>Semana 2</strong></a>
+				<div class="panel-body">
+                 <div class="list-group">
+			
+				    @if(!semanas.isEmpty() && semanas.get(1).isEmpty()){
+				        <p>Não existe nenhuma meta cadastrada para esta semana.</p>
+				    }else{
+					    @if(!semanas.isEmpty() && !semanas.get(1).isEmpty()){
+					
+					            @for(meta <- semanas.get(1).getMetas()){
+								<hr>
+								<table>
+					            
+								  <tr class="@meta.ehMetaAlcancada()">
+										<td>Meta: @meta.getNome() <br>
+										   Descrição: @meta.getDescricao() <br>
+										   Prioridade: @meta.getPrioridade()
+										</td></tr>
+										<tr><td>Marcar meta: </td> <td class="tdCheck" ><input class="check" type="checkbox" value="@meta.getNome()" name="marcaMetaAlcancada"  style="width: 27px; height: 25px"/></td><br></tr>
+										<tr><td>Deletar meta:</td><td><button class="btn-default deletar" id=@meta.getNome() ><img src="@routes.Assets.at("images/delete.png")"/></button></td></tr>
+								 </tr>									
+										
+								</table> 
+								<hr>
+					
+					            }
+							<p><strong> Quantidade de metas <i>alcançadas</i> nesta semana: @semanas.get(1).quantMetasAlcancadas()</strong> </p>
+							<p><strong> Quantidade de metas <i>não alcançadas</i> nesta semana: @semanas.get(1).quantMetasDesejadas()</strong> </p>								
+						}
+				    } 
+					<p><strong> Quantidade de metas nessa semana: @semanas.get(1).quantMetas()</strong> </p>
+				
+				  </div>
+				 </div>
+				</div>
+						<div class="panel panel-default">
+                <a href="#" class="list-group-item" id="semana3"><strong>Semana 3</strong></a>
+				<div class="panel-body">
+                 <div class="list-group">
+			
+				    @if(!semanas.isEmpty() && semanas.get(2).isEmpty()){
+				        <p>Não existe nenhuma meta cadastrada para esta semana.</p>
+				    }else{
+					    @for(meta <- semanas.get(2).getMetas()){
+								<hr>
+								<table>
+								  <tr class="@meta.ehMetaAlcancada()">
+										<td>Meta: @meta.getNome() <br>
+										   Descrição: @meta.getDescricao() <br>
+										   Prioridade: @meta.getPrioridade()
+										</td></tr>
+										<tr><td>Marcar meta: </td> <td class="tdCheck" ><input class="check" type="checkbox" value="@meta.getNome()" name="marcaMetaAlcancada"  style="width: 27px; height: 25px"/></td><br></tr>
+										<tr><td>Deletar meta:</td><td><button class="btn-default deletar" id=@meta.getNome() ><img src="@routes.Assets.at("images/delete.png")"/></button></td></tr>
+								 </tr>									
+										
+								</table> 
+								<hr>
+							}
+							<p><strong> Quantidade de metas <i>alcançadas</i> nesta semana: @semanas.get(2).quantMetasAlcancadas()</strong> </p>
+							<p><strong> Quantidade de metas <i>não alcançadas</i> nesta semana: @semanas.get(2).quantMetasDesejadas()</strong> </p>									
+						
+				    } 
+					<p><strong> Quantidade de metas nessa semana: @semanas.get(2).quantMetas()</strong> </p>
+				
+				  </div>
+				 </div>
+			</div>
+					<div class="panel panel-default">
+                <a href="#" class="list-group-item" id="semana4"><strong>Semana 4</strong></a>
+				<div class="panel-body">
+                 <div class="list-group">
+			
+				    @if(!semanas.isEmpty() && semanas.get(3).isEmpty()){
+				        <p>Não existe nenhuma meta cadastrada para esta semana.</p>
+				    }else{
+					    @for(meta <- semanas.get(3).getMetas()){
+								<hr>
+								<table>
+								  <tr class="@meta.ehMetaAlcancada()">
+										<td>Meta: @meta.getNome() <br>
+										   Descrição: @meta.getDescricao() <br>
+										   Prioridade: @meta.getPrioridade()
+										</td></tr>
+										<tr><td>Marcar meta: </td> <td class="tdCheck" ><input class="check" type="checkbox" value="@meta.getNome()" name="marcaMetaAlcancada"  style="width: 27px; height: 25px"/></td><br></tr>
+										<tr><td>Deletar meta:</td><td><button class="btn-default deletar" id=@meta.getNome() ><img src="@routes.Assets.at("images/delete.png")"/></button></td></tr>
+								 </tr>									
+										
+								</table> 
+								<hr>
+							}
+							<p><strong> Quantidade de metas <i>alcançadas</i> nesta semana: @semanas.get(3).quantMetasAlcancadas()</strong> </p>
+							<p><strong> Quantidade de metas <i>não alcançadas</i> nesta semana: @semanas.get(3).quantMetasDesejadas()</strong> </p>								
+						
+				    } 
+					<p><strong> Quantidade de metas nessa semana: @semanas.get(3).quantMetas()</strong> </p>
+				
+				  </div>
+				 </div>
+			</div>
+					<div class="panel panel-default">
+                <a href="#" class="list-group-item" id="semana5"><strong>Semana 5</strong></a>
+				<div class="panel-body">
+                 <div class="list-group">
+			
+				    @if(!semanas.isEmpty() && semanas.get(4).isEmpty()){
+				        <p>Não existe nenhuma meta cadastrada para esta semana.</p>
+				    }else{
+					    @for(meta <- semanas.get(4).getMetas()){
+								<hr>
+								<table>								
+								  <tr class="@meta.ehMetaAlcancada()">
+										<td>Meta: @meta.getNome() <br>
+										   Descrição: @meta.getDescricao() <br>
+										   Prioridade: @meta.getPrioridade()
+										</td></tr>
+										<tr><td>Marcar meta: </td> <td class="tdCheck" ><input class="check" type="checkbox" value="@meta.getNome()" name="marcaMetaAlcancada"  style="width: 27px; height: 25px"/></td><br></tr>
+										<tr><td>Deletar meta:</td><td><button class="btn-default deletar" id=@meta.getNome() ><img src="@routes.Assets.at("images/delete.png")"/></button></td></tr>
+								 </tr>									
+										
+								</table> 
+								<hr>
+							}
+							<p><strong> Quantidade de metas <i>alcançadas</i> nesta semana: @semanas.get(4).quantMetasAlcancadas()</strong> </p>
+							<p><strong> Quantidade de metas <i>não alcançadas</i> nesta semana: @semanas.get(4).quantMetasDesejadas()</strong> </p>								
+						
+				    } 
+					<p><strong> Quantidade de metas nessa semana: @semanas.get(4).quantMetas()</strong> </p>
+				
+				  </div>
+				 </div>
+			</div>
+					<div class="panel panel-default">
+                <a href="#" class="list-group-item" id="semana6"><strong>Semana 6</strong></a>
+				<div class="panel-body">
+                 <div class="list-group">
+			
+				    @if(!semanas.isEmpty() && semanas.get(5).isEmpty()){
+				        <p>Não existe nenhuma meta cadastrada para esta semana.</p>
+				    }else{
+					    @for(meta <- semanas.get(5).getMetas()){
+								<hr>
+								<table>
+								<tbody>								
+								  <tr class="@meta.ehMetaAlcancada()">
+										<td>Meta: @meta.getNome() <br>
+										   Descrição: @meta.getDescricao() <br>
+										   Prioridade: @meta.getPrioridade()
+										</td></tr>
+										<tr><td>Marcar meta: </td> <td class="tdCheck" ><input class="check" type="checkbox" value="@meta.getNome()" name="marcaMetaAlcancada"  style="width: 27px; height: 25px"/></td><br></tr>
+										<tr><td>Deletar meta:</td><td><button class="btn-default deletar" id=@meta.getNome() ><img src="@routes.Assets.at("images/delete.png")"/></button></td></tr>
+								 </tr>									
+								</tbody>		
+								</table> 
+								<hr>
+								}
+								<p><strong> Quantidade de metas <i>alcançadas</i> nesta semana: @semanas.get(5).quantMetasAlcancadas()</strong> </p>
+							    <p><strong> Quantidade de metas <i>não alcançadas</i> nesta semana: @semanas.get(5).quantMetasDesejadas()</strong> </p>							
+						
+				    } 
+					<p><strong> Quantidade de metas nessa semana: @semanas.get(5).quantMetas()</strong> </p>
+				
+				  </div>
+				 </div>
+			</div>
+
+					</div>
+				</div>	
+			
+
+	<hr>
+	</div><!--/col-6-->
+		
+           
+			<!-------------------------------------------------------------------------------------------------------------------->  		
+			
+			
+				<div class="well" id="adicionarmeta"><span class="glyphicon glyphicon-plus-sign" id="addNovaMeta"></span> <strong>Adicionar uma nova meta</strong> <br>
+					<p><form method="post" action="/adicionarMeta"/>
+					<div class="input-group input-group">
+						<span class="input-group-addon">Nome</span>
+						<input name="nome" type="text" class="form-control" placeholder="Digite a sua meta" required/>
+					</div>
+					<br>
+						<div class="input-group input-group">
+						<span class="input-group-addon">Descrição</span>
+						<input name="descricao" type="text" class="form-control" placeholder="Descreva sua meta" required/>
+					</div>
+					<br>
+					<div class="input-group input-group">
+						<span class="input-group-addon">Prioridade</span>
+						<select class="form-control" name="prioridade"required/>
+									<option>Atribua uma prioridade</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+						</select>
+					</div>
+					<br>
+					<div class="input-group input-group">
+						<span class="input-group-addon">Semana</span>
+						<select class="form-control" name="semana" placeholder="Digite a sua meta" required/>
+								<option>Escolha uma semana</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								</select>
+				  </div>
+				   <br>
+				  <div class="col-xs-8">
+				     <input class="btn btn-default" type="submit" value="Adicionar"/>
+				  </div>
+				 
+				</form></p>
+	    	  <hr>          
+		
+						</div><!--/panel-body-->
+			</div><!--/panel-->
+            <!-------------------------------------------------------------------------------------------------------------------->  	
+              
+                   
+     
+     
+      </div><!--/row-->
+      
+  	</div><!--/col-span-9-->
+</div>
+</div>
+<!-- /Main -->
+
+<footer class="text-center">This Bootstrap 3 dashboard layout is compliments of <a href="http://www.bootply.com/85850"><strong>Bootply.com</strong></a></footer>
+
+
+  
+	<!-- script references -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>
+	<script src="@routes.Assets.at("javascripts/scripts.js")" type="text/javascript"></script>
+
+	
+    </body>
+</html>
